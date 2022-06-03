@@ -36,7 +36,7 @@ cat <<=== >/etc/hostname
 archlinux
 ===
 
-#pacman -S --noconfirm grub efibootmgr dosfstools os-prober mtools
+pacman -S --noconfirm grub efibootmgr dosfstools os-prober mtools
 
 cat <<=== >/sbin/install-grub
 grub-install --target=x86_64-efi --efi-directory=/boot -bootloader-id=GRUB_UEFI
@@ -55,8 +55,5 @@ echo --- Leave chroot environment ---
 =====
 
 arch-chroot $MNT /bin/sh /root/install.sh
-
-
-
 
 rm $MNT/root/install.sh
