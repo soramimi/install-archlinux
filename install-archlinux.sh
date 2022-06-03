@@ -53,7 +53,7 @@ chmod 700 /sbin/update-grub
 install-grub
 update-grub
 
-cat <<=== >/etc/systemd/network/20-ethernet-network
+cat <<=== >/etc/systemd/network/20-ethernet.network
 [Match]
 Name=en*
 [Network]
@@ -68,6 +68,10 @@ cat <<=== >/etc/systemd/system/getty@tty1.service.d/override.conf
 [Service]
 ExecStart=
 ExecStart=/usr/bin/agetty --autologin root --noclear %I $TERM
+===
+
+cat <<=== >/root/disable-autologin
+rm /etc/systemd/system/getty@tty1.service.d/override.conf
 ===
 
 echo --- Leave chroot environment ---
