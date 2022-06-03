@@ -13,6 +13,8 @@ fi
 
 pacstrap $MNT base linux sudo nano git
 
+sed -i -e 's/# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/' $MNT/etc/sudoers
+
 genfstab -U $MNT >>/$MNT/etc/fstab
 
 cat <<===== >$MNT/root/install.sh
@@ -60,6 +62,13 @@ DHCP=yes
 systemctl enable systemd-networkd
 systemctl enable systemd-resolved
 systemctl disable systemd-networkd-wait-online
+
+mkdir -p /etc/systemd/system/getty@tty1.service.d/
+cat <<=== >/etc/systemd/system/getty@tty1.service.d/override.conf
+[Service]
+ExecStart=
+ExecStart=/usr/bin/agetty --autologin root --noclear %I $TERM
+===
 
 echo --- Leave chroot environment ---
 =====
