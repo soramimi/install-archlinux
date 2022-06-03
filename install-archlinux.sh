@@ -1,4 +1,9 @@
 #!/bin/sh
+if [ -z $1 ]; then
+	echo "usage: sudo ./install-archlinux.sh <dir>"
+	exit 1
+fi
+
 MNT=$1
 MNTBOOT=$MNT/boot
 
@@ -10,6 +15,9 @@ if [ ! -d $MNTBOOT ]; then
 	echo $MNTBOOT is not a directory
 	exit 1
 fi
+
+echo $MNT
+echo $MNTBOOT
 
 pacstrap $MNT base linux sudo nano git
 
@@ -70,9 +78,10 @@ ExecStart=
 ExecStart=/usr/bin/agetty --autologin root --noclear %I $TERM
 ===
 
-cat <<=== >/root/disable-autologin
+cat <<=== >/root/disable-autologin.sh
 rm /etc/systemd/system/getty@tty1.service.d/override.conf
 ===
+chmod +x /root/disable-autologin.sh
 
 echo --- Leave chroot environment ---
 =====
