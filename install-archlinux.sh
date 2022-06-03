@@ -19,7 +19,7 @@ fi
 echo $MNT
 echo $MNTBOOT
 
-pacstrap $MNT base linux sudo nano git
+pacstrap $MNT base linux linux-firmware sudo nano
 
 sed -i -e 's/# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/' $MNT/etc/sudoers
 
