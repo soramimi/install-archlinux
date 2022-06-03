@@ -39,7 +39,7 @@ archlinux
 pacman -S --noconfirm grub efibootmgr dosfstools os-prober mtools
 
 cat <<=== >/sbin/install-grub
-grub-install --target=x86_64-efi --efi-directory=/boot -bootloader-id=GRUB_UEFI
+grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB_UEFI
 ===
 chmod 700 /sbin/install-grub
 
@@ -50,6 +50,16 @@ chmod 700 /sbin/update-grub
 
 install-grub
 update-grub
+
+cat <<=== >/etc/systemd/network/20-ethernet-network
+[Match]
+Name=en*
+[Network]
+DHCP=yes
+===
+systemctl enable systemd-networkd
+systemctl enable systemd-resolved
+systemctl disable systemd-networkd-wait-online
 
 echo --- Leave chroot environment ---
 =====
