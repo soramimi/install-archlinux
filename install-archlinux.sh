@@ -11,7 +11,7 @@ if [ ! -d $MNTBOOT ]; then
 	exit 1
 fi
 
-#pacstrap $MNT base linux sudo nano git
+pacstrap $MNT base linux sudo nano git
 
 genfstab -U $MNT >>/$MNT/etc/fstab
 
@@ -48,8 +48,8 @@ grub-mkconfig -o /boot/grub/grub.cfg
 ===
 chmod 700 /sbin/update-grub
 
-#install-grub
-#update-grub
+install-grub
+update-grub
 
 echo --- Leave chroot environment ---
 =====
